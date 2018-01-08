@@ -18,7 +18,7 @@ function transport(callback) {
 // get record by record using stream
 function streamRead() {
     let recordsList = [];
-    sql.connect(config, err => {
+    sql.connect(sqlConfig, err => {
         // ... error checks
         if (err) {
             showMessage('error in connect to sqlserver: ' + err)
@@ -43,9 +43,10 @@ function streamRead() {
         })
 
         request.on('done', result => {
+            sql.close();
             // Always emitted as the last one
-            showMessage('all records is ready to insert!')
-// send array to orient for insert
+            showMessage('all records is ready to insert! #' + recordsList.length)
+            // send array to orient for insert
 
         })
     })
